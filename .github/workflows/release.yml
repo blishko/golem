@@ -27,5 +27,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: golem-arm-osx.tar.bz2
-          path: ./golem-arm-osx.tar.bz2
+          path: ./build-static/golem.tar.bz2
 
