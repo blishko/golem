@@ -13,12 +13,11 @@ jobs:
 
       - name: Set up build environment
         run: |
-          echo "HOMEBREW_NO_AUTO_UPDATE=1" >> "$BASH_ENV"
           brew install cmake
           brew install gmp
           brew install bison
           brew install flex
-          echo 'export PATH=/opt/homebrew/opt/flex/bin:/opt/homebrew/opt/bison/bin:$PATH' >> "$BASH_ENV"
+          echo "/opt/homebrew/opt/flex/bin:/opt/homebrew/opt/bison/bin" >> "$GITHUB_PATH"
 
       - name: Build project
         run: |
