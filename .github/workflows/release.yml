@@ -20,11 +20,10 @@ jobs:
 
       - name: Set up build environment
         run: |
-          brew install cmake
-          brew install gmp
           brew install bison
           brew install flex
           echo "/opt/homebrew/opt/flex/bin:/opt/homebrew/opt/bison/bin" >> "$GITHUB_PATH"
+          echo "/usr/local/opt/flex/bin:/usr/local/opt/bison/bin" >> "$GITHUB_PATH"
 
       - name: Build project
         run: |
