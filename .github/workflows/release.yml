@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  release-builds:
+  release-builds-osx:
     strategy:
       matrix:
         include:
@@ -34,5 +34,28 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ./golem-${{ matrix.suffix }}.tar.bz2 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release-build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up build environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bison cmake flex libgmp-dev
+            
+      - name: Build project
+        run: |
+          ./ci/build_maximally_static.sh
+          mv ./build-static/golem.tar.bz2 ./golem-x64-linux.tar.bz2
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./golem-x64-linux.tar.bz2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
